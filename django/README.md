@@ -2,14 +2,15 @@
 
 ## Install Django into a virtual environment
 
-### Install pip
+### Install pip (if pip3 returns 'command not found')
 ```
 pip3 --version
 python3 -m ensurepip --default-pip
 ```
 
-### Install venv
+### Install venv (if virtualenv is not a installed package)
 ```
+pip3 list
 sudo -H pip3 install virtualenv
 ```
 
@@ -27,7 +28,6 @@ python3 -m virtualenv venv
 ```
 pip3 install Django
 python3 -m django --version
-3.0.4
 ```
 
 ## Create Django project and app
@@ -46,15 +46,18 @@ python3 -m django --version
 django-admin.py startproject mytest
 ```
 
-### Update django environment
+### Change to the project folder
 ```
 cd mytest
+```
+
+### Update django environment
+```
 python3 manage.py migrate 
 ```
 
-### Create the app (inside mytest project environment) 
+### Create the app (sub-folder to the project folder)
 ```
-cd mytest
 python3 manage.py startapp mytestproject
 ```
 
@@ -62,9 +65,8 @@ python3 manage.py startapp mytestproject
 ```
 from django.http import HttpResponse
 
-
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, world!")
 ```
 
 ### Create mytestproject/urls.py
@@ -72,37 +74,42 @@ def index(request):
 from django.contrib import admin
 from django.urls import include, path
 
+from . import views
+
 urlpatterns = [
-    path('polls/', include('polls.urls')),
-    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
 ]
 ```
 
-### Edit mytest/mytest/urls.py
+### Edit mytest/urls.py (modify urlpatterns)
 ```
+...
+from django.conf.urls import include, url
+from django.contrib import admin
+
 urlpatterns = [
-    url(r'^mytestproject/', include('mytest.mytestproject.urls')),
-    url(r'^admin/', admin.site.urls),
+    url('', include('mytestproject.urls')),
+    url('admin/', admin.site.urls),
 ]
 ```
 
 ## Run the server
-
-### switch to the virtual environment if you are not already in
 ```
+# switch to the virtual environment if you are not already in
 . ./venv/bin/activate
-
+# make sure you are in the project folder
 cd mytest
+# run the server
 python3 manage.py runserver
 ```
+
+http://127.0.0.1:8000/ should display
+> 'Hello, world!'
 
 ## Load index.html and style.css
 
 ### Edit mytestproject/views.py
 ```
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -138,9 +145,6 @@ TEMPLATES = [
     },
 ]
 ...
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -175,7 +179,7 @@ p {
 }
 ```
 
-## Directory structure should look like this
+## Folder structure should look like this
 ```
 mytest/
 ├── db.sqlite3
