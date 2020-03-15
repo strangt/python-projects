@@ -18,12 +18,12 @@ sudo -H pip3 install virtualenv
 python3 -m virtualenv venv
 ```
 
-### switch to the virtual environment
+### Switch to the virtual environment
 ```
 . ./venv/bin/activate
 ```
 
-### install Django into the virtual environment
+### Install Django into the virtual environment
 ```
 pip3 install Django
 python3 -m django --version
@@ -46,7 +46,7 @@ python3 -m django --version
 django-admin.py startproject mytest
 ```
 
-### update django environment
+### Update django environment
 ```
 cd mytest
 python3 manage.py migrate 
@@ -58,7 +58,7 @@ cd mytest
 python3 manage.py startapp mytestproject
 ```
 
-### edit mytestproject/views.py
+### Edit mytestproject/views.py
 ```
 from django.http import HttpResponse
 
@@ -67,7 +67,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 ```
 
-### create mytestproject/urls.py
+### Create mytestproject/urls.py
 ```
 from django.contrib import admin
 from django.urls import include, path
@@ -78,7 +78,7 @@ urlpatterns = [
 ]
 ```
 
-### edit mytest/mytest/urls.py
+### Edit mytest/mytest/urls.py
 ```
 urlpatterns = [
     url(r'^mytestproject/', include('mytest.mytestproject.urls')),
@@ -86,31 +86,32 @@ urlpatterns = [
 ]
 ```
 
-## directory structure
+## Directory structure
 
->   mytest 
->       db.sqlite3
->       manage.py
->       mytest
->           __init__.py
->           settings.py
->           urls.py
->           wsgi.py
->       mytestproject
->           __init__.py
->           admin.py
->           apps.py
->           migrations
->               __init__.py
->           models.py
->           tests.py
->           urls.py
->           views.py
+mytest/
+├── db.sqlite3
+├── manage.py
+├── mytest
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+└── mytestproject
+    ├── __init__.py
+    ├── admin.py
+    ├── apps.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── tests.py
+    ├── urls.py
+    └── views.py
 
 ## Run the server
 
 ### switch to the virtual environment if you are not already in
-```. ./venv/bin/activate
+```
+. ./venv/bin/activate
 
 cd mytest
 python3 manage.py runserver
@@ -118,8 +119,9 @@ python3 manage.py runserver
 
 ## Load index.html and style.css
 
-### edit mytestproject/views.py
-```# -*- coding: utf-8 -*-
+### Edit mytestproject/views.py
+```
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.shortcuts import render
@@ -138,8 +140,9 @@ def index(request):
     return render(request, 'index.html', context=context)
 ```
 
-### edit mytest/settings.py (TEMPLATES and STATICFILES)
-```...
+### Edit mytest/settings.py (TEMPLATES and STATICFILES)
+```
+...
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -166,8 +169,9 @@ STATICFILES_DIRS = [
 ]
 ```
 
-### edit mytestproject/templates/index.html
-```{% load static %}
+### Edit mytestproject/templates/index.html
+```
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -180,8 +184,9 @@ STATICFILES_DIRS = [
 </html>
 ```
 
-### edit mytestproject/static/stylesheets/style.css
-```body {
+### Edit mytestproject/static/stylesheets/style.css
+```
+body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
