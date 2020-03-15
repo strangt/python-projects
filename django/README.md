@@ -1,4 +1,4 @@
-# Python Django with indez.html and style.css
+# Python Django with index.html and style.css
 
 ## Install Django into a virtual environment
 
@@ -85,27 +85,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 ```
-
-## Directory structure
-
-mytest/
-├── db.sqlite3
-├── manage.py
-├── mytest
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-└── mytestproject
-    ├── __init__.py
-    ├── admin.py
-    ├── apps.py
-    ├── migrations
-    │   └── __init__.py
-    ├── models.py
-    ├── tests.py
-    ├── urls.py
-    └── views.py
 
 ## Run the server
 
@@ -194,4 +173,31 @@ body {
 p {
   color: #00B7FF;
 }
+```
+
+## Directory structure should look like this
+```
+mytest/
+├── db.sqlite3
+├── manage.py
+├── mytest
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── mytestproject
+    ├── __init__.py
+    ├── admin.py
+    ├── apps.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── static
+    │   └── stylesheets
+    │       └── style.css
+    ├── templates
+    │   └── index.html
+    ├── tests.py
+    ├── urls.py
+    └── views.py
 ```
