@@ -3,25 +3,29 @@
 ## Install Django into a virtual environment
 
 ### Install pip
-```pip3 --version
+```
+pip3 --version
 python3 -m ensurepip --default-pip
 ```
 
 ### Install venv
-```sudo -H pip3 install virtualenv
+```
+sudo -H pip3 install virtualenv
 ```
 
 ### Create the virtual env
-```python3 -m virtualenv venv
+```
+python3 -m virtualenv venv
 ```
 
 ### switch to the virtual environment
-```. ./venv/bin/activate
+```
+. ./venv/bin/activate
 ```
 
 ### install Django into the virtual environment
-```pip3 install Django
-
+```
+pip3 install Django
 python3 -m django --version
 3.0.4
 ```
@@ -38,24 +42,33 @@ python3 -m django --version
 >   website. A project can contain multiple apps.
 
 ### Initialize Django project (environment)
+```
 django-admin.py startproject mytest
+```
 
 ### update django environment
+```
 cd mytest
 python3 manage.py migrate 
+```
 
 ### Create the app (inside mytest project environment) 
+```
 cd mytest
 python3 manage.py startapp mytestproject
+```
 
 ### edit mytestproject/views.py
+```
 from django.http import HttpResponse
 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
+```
 
 ### create mytestproject/urls.py
+```
 from django.contrib import admin
 from django.urls import include, path
 
@@ -63,33 +76,36 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
+```
 
 ### edit mytest/mytest/urls.py
+```
 urlpatterns = [
     url(r'^mytestproject/', include('mytest.mytestproject.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+```
 
 ## directory structure
 
-> mytest/
-> ├── db.sqlite3
-> ├── manage.py
-> ├── mytest
-> │   ├── __init__.py
-> │   ├── settings.py
-> │   ├── urls.py
-> │   ├── wsgi.py
-> └── mytestproject
->     ├── __init__.py
->     ├── admin.py
->     ├── apps.py
->     ├── migrations
->     │   └── __init__.py
->     ├── models.py
->     ├── tests.py
->     ├── urls.py
->     └── views.py
+>   mytest 
+>       db.sqlite3
+>       manage.py
+>       mytest
+>           __init__.py
+>           settings.py
+>           urls.py
+>           wsgi.py
+>       mytestproject
+>           __init__.py
+>           admin.py
+>           apps.py
+>           migrations
+>               __init__.py
+>           models.py
+>           tests.py
+>           urls.py
+>           views.py
 
 ## Run the server
 
